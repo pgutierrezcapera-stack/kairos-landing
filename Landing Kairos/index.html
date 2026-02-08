@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kairos - Seguros e Inversiones Ltda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-oscuro: #055AAE;
+            --azul-claro: #0CB4F3;
+            --blanco-raro: #E5EEF7;
+            --gris: #999999;
+            --blanco-raro-2: #D9E7F5;
+            --blanco: #FFFFFF;
+            --negro: #000000;
+            --header-bg: #F2F2F7;
+
+            --font-family: 'Rethink Sans', sans-serif;
+            --titulo-size: 96px;
+            --subtitulo-size: 64px;
+            --body-size: 20px;
+            --caption-size: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: var(--body-size);
+            font-weight: 400;
+            color: var(--negro);
+            line-height: 1.5;
+        }
+
+        .titulo-principal {
+            font-family: var(--font-family);
+            font-weight: 700;
+            font-size: clamp(40px, 8vw, var(--titulo-size));
+            line-height: 1.1;
+            letter-spacing: 0;
+        }
+
+        .titulo {
+            font-family: var(--font-family);
+            font-weight: 700;
+            font-size: clamp(36px, 5vw, var(--subtitulo-size));
+            line-height: 1.2;
+            letter-spacing: 0;
+        }
+
+        .subtitulo {
+            font-family: var(--font-family);
+            font-weight: 500;
+            font-size: clamp(24px, 4vw, var(--subtitulo-size));
+            line-height: 1.3;
+            letter-spacing: 0;
+        }
+
+        .body-text {
+            font-family: var(--font-family);
+            font-weight: 400;
+            font-size: var(--body-size);
+            line-height: 1.5;
+            letter-spacing: 0;
+        }
+
+        .caption {
+            font-family: var(--font-family);
+            font-weight: 400;
+            font-size: var(--caption-size);
+            line-height: 1.5;
+            letter-spacing: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            font-family: var(--font-family);
+            font-weight: 400;
+            font-size: var(--body-size);
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-azul-claro {
+            background: var(--azul-claro);
+            color: var(--blanco);
+        }
+
+        .btn-azul-oscuro {
+            background: var(--azul-oscuro);
+            color: var(--blanco);
+        }
+
+        /* Header - Rectángulo redondeado flotante */
+        .header-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 60px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 16px 40px;
+            background: var(--header-bg);
+            border-radius: 60px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            pointer-events: auto;
+        }
+
+        .logo-header img {
+            height: 44px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav a {
+            font-family: var(--font-family);
+            font-size: var(--body-size);
+            color: var(--negro);
+            text-decoration: none;
+            pointer-events: none;
+        }
+
+        nav .btn {
+            pointer-events: none;
+        }
+
+        /* Hero Section - Imagen con overlay */
+        .hero {
+            min-height: 100vh;
+            background: var(--blanco);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-imagen {
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%);
+        }
+
+        .hero-texto {
+            text-align: center;
+            max-width: 900px;
+            padding: 0 40px;
+        }
+
+        .hero-texto .titulo-principal {
+            color: var(--blanco);
+            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Sección Fácil (Nosotros) */
+        .facil {
+            background: var(--blanco);
+            padding: 80px;
+        }
+
+        .facil .subtitulo {
+            text-align: center;
+            color: var(--negro);
+            margin-bottom: 64px;
+        }
+
+        .facil-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .facil-pasos {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .facil-paso {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+        }
+
+        .facil-paso-numero {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--azul-oscuro);
+            color: var(--blanco);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-family);
+            font-weight: 700;
+            font-size: var(--body-size);
+        }
+
+        .facil-paso-texto {
+            font-family: var(--font-family);
+            font-size: var(--body-size);
+            color: var(--negro);
+            line-height: 1.5;
+            padding-top: 4px;
+        }
+
+        .facil-imagen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .facil-imagen img {
+            width: 380px;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Sección Por qué elegir a Kairos */
+        .por-que {
+            background: var(--blanco-raro);
+            padding: 80px;
+        }
+
+        .por-que .titulo {
+            text-align: center;
+            color: var(--negro);
+            margin-bottom: 64px;
+        }
+
+        .por-que-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .por-que-card {
+            background: var(--blanco);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .por-que-card-titulo {
+            font-family: var(--font-family);
+            font-weight: 700;
+            font-size: var(--body-size);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--negro);
+            margin-bottom: 24px;
+        }
+
+        .por-que-card-icono {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        .por-que-card-texto {
+            font-family: var(--font-family);
+            font-size: var(--body-size);
+            color: var(--negro);
+            line-height: 1.5;
+        }
+
+        /* Aliados Section - Sin cambios */
+        .aliados {
+            background: var(--blanco-raro-2);
+            padding: 80px;
+        }
+
+        .aliados .titulo {
+            text-align: center;
+            color: var(--negro);
+            margin-bottom: 64px;
+        }
+
+        .aliados-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 80px;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .aliados-logos img {
+            height: 60px;
+            object-fit: contain;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+        }
+
+        .aliados-logos img:hover {
+            opacity: 1;
+        }
+
+        /* CTA Section con Formulario */
+        .cta {
+            background: var(--azul-claro);
+            padding: 80px;
+            text-align: center;
+        }
+
+        .cta .titulo {
+            color: var(--blanco);
+            margin-bottom: 24px;
+        }
+
+        .cta .body-text {
+            color: var(--blanco);
+            max-width: 600px;
+            margin: 0 auto 48px;
+            opacity: 0.95;
+        }
+
+        .cta-form {
+            max-width: 560px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: left;
+        }
+
+        .cta-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .cta-form-group {
+            margin-bottom: 20px;
+        }
+
+        .cta-form-grid .cta-form-group {
+            margin-bottom: 0;
+        }
+
+        .cta-form label {
+            display: block;
+            font-family: var(--font-family);
+            font-size: var(--caption-size);
+            color: var(--blanco);
+            margin-bottom: 8px;
+        }
+
+        .cta-form input,
+        .cta-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            font-family: var(--font-family);
+            font-size: var(--body-size);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--negro);
+        }
+
+        .cta-form input::placeholder,
+        .cta-form textarea::placeholder {
+            color: var(--gris);
+        }
+
+        .cta-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .cta-form .cta-form-full {
+            grid-column: 1 / -1;
+        }
+
+        .cta-form .cta-form-submit {
+            grid-column: 1 / -1;
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cta-form .btn {
+            pointer-events: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--azul-oscuro);
+            padding: 80px 80px 40px;
+            color: var(--blanco);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 64px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo img {
+            height: 48px;
+            margin-bottom: 20px;
+        }
+
+        .footer-slogan {
+            font-family: var(--font-family);
+            font-size: var(--body-size);
+            color: var(--blanco);
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .footer-col h3 {
+            font-family: var(--font-family);
+            font-weight: 700;
+            font-size: var(--caption-size);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--blanco);
+            margin-bottom: 24px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col a {
+            color: var(--blanco);
+            text-decoration: none;
+            font-size: var(--body-size);
+            opacity: 0.9;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .footer-col a:hover {
+            opacity: 1;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            text-decoration: none;
+            font-size: 18px;
+            transition: background 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--azul-claro);
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-copyright .caption {
+            color: var(--blanco);
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .header-wrapper {
+                padding: 16px 24px;
+            }
+
+            header {
+                padding: 12px 24px;
+            }
+
+            nav ul {
+                gap: 24px;
+            }
+
+            .facil-content {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .facil-imagen {
+                order: -1;
+            }
+
+            .facil-imagen img {
+                width: 300px;
+                height: 300px;
+            }
+
+            .por-que-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-wrap: wrap;
+                gap: 16px;
+                justify-content: center;
+            }
+
+            .hero,
+            .facil,
+            .por-que,
+            .aliados,
+            .cta,
+            footer {
+                padding: 48px 24px;
+            }
+
+            .cta-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .facil-imagen img {
+                width: 260px;
+                height: 260px;
+            }
+
+            .aliados-logos {
+                flex-direction: column;
+                gap: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-wrapper">
+        <header>
+            <a href="#" class="logo-header">
+                <img src="kairos-blue.png" alt="Kairos - Seguros e Inversiones Ltda">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#">Acerca de</a></li>
+                    <li><a href="#">Nuestros productos</a></li>
+                    <li><a href="#">Crea tu agencia</a></li>
+                    <li><a href="#" class="btn btn-azul-claro">Agenda una cita</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="inicio">
+            <img src="builing.png" alt="Edificios corporativos" class="hero-imagen">
+            <div class="hero-overlay">
+                <div class="hero-texto">
+                    <h1 class="titulo-principal">Protege lo que más te importa</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Fácil (Nosotros) -->
+        <section class="facil" id="nosotros">
+            <h2 class="subtitulo">Adquirir un seguro nunca había sido tan fácil</h2>
+            <div class="facil-content">
+                <div class="facil-pasos">
+                    <div class="facil-paso">
+                        <span class="facil-paso-numero">1</span>
+                        <span class="facil-paso-texto">Contacta con nosotros y completa el simulador (5 minutos)</span>
+                    </div>
+                    <div class="facil-paso">
+                        <span class="facil-paso-numero">2</span>
+                        <span class="facil-paso-texto">Revisa junto a tu asesor las diferentes alternativas según tu perfil</span>
+                    </div>
+                    <div class="facil-paso">
+                        <span class="facil-paso-numero">3</span>
+                        <span class="facil-paso-texto">Elige la póliza que más se ajuste a tus objetivos</span>
+                    </div>
+                    <div class="facil-paso">
+                        <span class="facil-paso-numero">4</span>
+                        <span class="facil-paso-texto">¡Y listo! Ya estás protegiendo tu patrimonio</span>
+                    </div>
+                </div>
+                <div class="facil-imagen">
+                    <img src="family.png" alt="Familia">
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Por qué elegir a Kairos -->
+        <section class="por-que" id="servicios">
+            <h2 class="titulo">¿Por qué elegir a Kairos?</h2>
+            <div class="por-que-grid">
+                <div class="por-que-card">
+                    <div class="por-que-card-titulo">Experiencia</div>
+                    <img src="stars.png" alt="Experiencia" class="por-que-card-icono">
+                    <p class="por-que-card-texto">Llevamos más de 15 años trabajando en la protección e inversión de las familias.</p>
+                </div>
+                <div class="por-que-card">
+                    <div class="por-que-card-titulo">Personalización</div>
+                    <img src="logo-morado.png" alt="Personalización" class="por-que-card-icono">
+                    <p class="por-que-card-texto">Tendrás acceso a una evaluación de tu patrimonio y obtendrás recomendaciones de productos que se ajusten a tu nivel económico y a tu momento de vida.</p>
+                </div>
+                <div class="por-que-card">
+                    <div class="por-que-card-titulo">Inversión + Protección</div>
+                    <img src="logo-amarillo.png" alt="Inversión + Protección" class="por-que-card-icono">
+                    <p class="por-que-card-texto">Accede a una solución donde inviertes tu dinero en la bolsa.</p>
+                </div>
+                <div class="por-que-card">
+                    <div class="por-que-card-titulo">Ahorro en dólares</div>
+                    <img src="logo-amarillo.png" alt="Ahorro en dólares" class="por-que-card-icono">
+                    <p class="por-que-card-texto">Protege tu dinero en una moneda estable como lo es el dólar.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aliados Section -->
+        <section class="aliados" id="aliados">
+            <h2 class="titulo">Nuestros aliados</h2>
+            <div class="aliados-logos">
+                <img src="skandia.png" alt="Skandia">
+                <img src="mapfre.png" alt="MAPFRE">
+                <img src="bmi.png" alt="BMI">
+            </div>
+        </section>
+
+        <!-- CTA Section con Formulario -->
+        <section class="cta" id="contacto">
+            <h2 class="titulo">Comienza hoy a asegurar tu futuro</h2>
+            <p class="body-text">Lorem ipsum dolor sit amet consectetur. Erat sit turpis odio ipsum turpis in amet habitant. Amet ut donec eu tristique egestas.</p>
+            <form class="cta-form">
+                <div class="cta-form-grid">
+                    <div class="cta-form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="cta-form-group">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" id="apellido" name="apellido" placeholder="Tu apellido" required>
+                    </div>
+                </div>
+                <div class="cta-form-grid">
+                    <div class="cta-form-group">
+                        <label for="correo">Correo</label>
+                        <input type="email" id="correo" name="correo" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="cta-form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="+00 000 0000">
+                    </div>
+                </div>
+                <div class="cta-form-group cta-form-full">
+                    <label for="mensaje">Mensaje (opcional)</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje..."></textarea>
+                </div>
+                <div class="cta-form-submit">
+                    <button type="submit" class="btn btn-azul-oscuro">Enviar</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="kairos-white.png" alt="Kairos - Seguros e Inversiones Ltda">
+                <p class="footer-slogan">Protege lo que más te importa</p>
+            </div>
+            <div class="footer-col">
+                <h3>Navegación</h3>
+                <ul>
+                    <li><a href="#">Acerca de</a></li>
+                    <li><a href="#">Nuestros productos</a></li>
+                    <li><a href="#">Conviértete en agente</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Redes sociales</h3>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p class="caption">©2023 Kairos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.cta-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
